@@ -1,0 +1,88 @@
+---
+title: "Revenue_forecasting using Prophet"
+author: "Nachu"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+This project involves building a revenue forecasting model using R  Prophet package. The model is based on historical revenue data and generates revenue predictions for the year 2025. The forecast is visualized with a clear comparison between historical and forecasted revenue.
+
+Data used was generated with the help of LLM, given the following criteria:
+A baseline number of visits that fluctuates around 900 to 1,200 visits per month.
+Seasonal adjustments to reflect higher visits in certain months (e.g., flu season in fall/winter) and lower visits in summer (when elective procedures are typically down).
+Random noise to introduce variability.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,include=TRUE)
+```
+
+```{r}
+install.packages("prophet",repos = "https://cran.r-project.org")
+install.packages("forecast",repos = "https://cran.r-project.org")
+library(prophet)
+library(stargazer)
+library (ggplot2)
+```
+```{r}
+data <- read.csv("C:\\Users\\Nachu\\Downloads\\RCM_Revenue_Forecast_Synthetic_Data_2022_2024.csv")#read data
+```
+
+```{r}
+data$Date <- as.Date(data$Date)
+data_totrev <- data[, c("Date", "Total_Revenue")]
+colnames(data_totrev) <- c("ds", "y")#rename columns reqd by package
+model <- prophet(data_totrev)
+
+# Make future predictions for the next 12 months
+future <- make_future_dataframe(model, periods = 12, freq = "month")
+
+# Predict future values
+forecast <- predict(model, future)
+
+forecast_2025 <- subset(forecast, ds >= as.Date("2025-01-01") & ds <= as.Date("2025-12-31"))
+
+# View the forecasted values
+forecast_2025[, "yhat"]
+
+#Present in table
+stargazer(
+  forecast_2025[, c("ds", "yhat", "yhat_lower", "yhat_upper")],
+  covariate.labels = c("Date","Income", "Lower bound","Upper bound"),
+  type = "text",
+  title = "2025 Revenue Forecast",
+  rownames = FALSE,
+  summary = FALSE,
+  digits = 0
+)
+```
+
+```{r}
+# Combine historical and forecasted data
+forecast_plot_data <- rbind(
+  data.frame(Date = as.Date(data_totrev$ds), Revenue = data$Total_Revenue, Type = "Actual"),
+  data.frame(Date = as.Date(forecast_2025$ds), Revenue = forecast_2025$yhat, Type = "Forecast")
+)
+
+#Create new column for x axis labels to be displayed as month and year
+forecast_plot_data$Month_Year <- format(forecast_plot_data$Date, "%b %Y") 
+forecast_plot_data$Month_Year <- as.factor(forecast_plot_data$Month_Year)
+forecast_plot_data$Month_Year <- reorder(forecast_plot_data$Month_Year, forecast_plot_data$Date)
+
+
+
+# Create the ggplot
+ggplot(forecast_plot_data, aes(x = Month_Year, y = Revenue, color = Type, group = Type)) +
+  geom_line(size = 1) +
+  scale_color_manual(values = c("Actual" = "darkblue", "Forecast" = "darkred")) +
+  scale_x_discrete(breaks = levels(forecast_plot_data$Month_Year)[seq(1, length(levels(forecast_plot_data$Month_Year)), by = 3)])+
+  labs(title = "Revenue Forecast (2022-2025)",
+       x = "Month",
+       y = "Total Revenue",
+       color = "Legend") +
+  theme_minimal() +
+  theme(legend.position = "top",
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
