@@ -51,7 +51,7 @@ Revenue=Patient Visits×Payer Mix×Reimbursement Rate×(1−Denial Rate)
 
 ## 📊 Forecast Insights
 
-The forecasted revenue for 2025 shows a continuation of the historical trends observed from 2022 to 2024. The model accounts for seasonality and quarterly trends.
+The forecasted revenue for 2025 shows a continuation of the historical trends observed from 2022 to 2024. The model accounts for seasonality and quarterly trends. The forecast could help inform hospital resource allocation and budgeting. 
 
 ---
 
