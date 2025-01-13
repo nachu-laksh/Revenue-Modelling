@@ -8,7 +8,7 @@ Revenue forecast model using the 'Prophet' package in R.
 
 The dataset used for this sample model was generated with the help of LLM, based on the following criteria:
 
-- Baseline patient visitsthat fluctuated around 900 to 1,200 visits per month.
+- Baseline patient visits that fluctuated around 900 to 1,200 visits per month.
 - Seasonal adjustments to reflect higher visits in certain months (e.g., flu season in fall/winter) and lower visits in summer (when elective procedures are typically down).
 - Random noise to introduce variability.
 
@@ -37,15 +37,6 @@ Revenue = Patient_Visits * Payer_Mix * Reimbursement_Rate * (1 − Denial_Rate)
 - **Medicaid_Revenue**: Revenue generated from Medicaid.
 - **Claims_Denial_Rate**: Percentage of denied claims each month.
 - **Total_Revenue**: The total monthly revenue from all payer sources.
-
----
-
-## 📈 Key Steps in the R Markdown File
-
-1. **Data Loading**: The dataset was read from `RCM_Revenue_Forecast_Synthetic_Data_2022_2024.csv`.
-2. **Prophet Model**: A revenue forecast was built using the Prophet package.
-3. **Table Output**: Forecasted revenue values for each month of 2025 were displayed.
-4. **Forecast Visualization**: Historical revenue (2022-2024) and forecasted revenue for 2025 were plotted.
 
 ---
 
