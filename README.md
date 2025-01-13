@@ -1,4 +1,4 @@
-# Revenue-Modelling
+# Revenue Modelling
 
 Revenue forecast model using the 'Prophet' package in R.
 
@@ -9,7 +9,7 @@ Revenue forecast model using the 'Prophet' package in R.
 The dataset used for this sample model was generated with the help of LLM, based on the following criteria:
 
 - Baseline patient visitsthat fluctuated around 900 to 1,200 visits per month.
-- Seasonal adjustments to reflect higher visits in certain months (e.g., **flu season in fall/winter) and lower visits in summer (when elective procedures are typically down).
+- Seasonal adjustments to reflect higher visits in certain months (e.g., flu season in fall/winter) and lower visits in summer (when elective procedures are typically down).
 - Random noise to introduce variability.
 
 The payer mix (Private, Medicare, Medicaid) was randomized, and the final percentages were normalized to sum to 100% for each month.
