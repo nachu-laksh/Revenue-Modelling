@@ -59,8 +59,8 @@ The forecasted revenue for 2025 shows a continuation of the historical trends ob
 
 In addition to the Prophet model, additional techniques that could be practiced in future with this dataset:
 
- **ETS (Error, Trend, Seasonality)**: Exponential smoothing technique for time series forecasting.
- **Random Forest for Time Series**: Using machine learning algorithms to capture non-linear patterns in the data.
+- **ETS (Error, Trend, Seasonality)**: Exponential smoothing technique for time series forecasting.
+- **Random Forest for Time Series**: Using machine learning algorithms to capture non-linear patterns in the data.
 
 ---
 
