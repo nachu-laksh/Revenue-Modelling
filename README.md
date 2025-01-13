@@ -23,9 +23,9 @@ Different reimbursement rates were assumed for each payer type:
 | Medicaid      | $90 to $110 per patient         |
 
 The monthly revenue per payer type was calculated using the following formula:
-
-Revenue=Patient Visits×Payer Mix×Reimbursement Rate×(1−Denial Rate)
-
+```
+Revenue = Patient_Visits * Payer_Mix * Reimbursement_Rate * (1 − Denial_Rate)
+```
 ---
 
 ## 📋 Columns in the Dataset
